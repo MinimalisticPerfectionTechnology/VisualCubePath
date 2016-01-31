@@ -1,12 +1,17 @@
 package se.MindFeed.Start;
 
+import java.awt.Font;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import org.newdawn.slick.*;
-import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.TrueTypeFont;
 
-import se.MindFeed.GameObjects.GO;
 import se.MPT.GraphicElement.Cube;
 import se.MPT.Logics.Generator;
 import se.MPT.Logics.Move;
@@ -14,38 +19,28 @@ import se.MPT.Logics.PermGenerator;
 import se.MPT.Logics.Side;
 import se.MPT.Logics.UI;
 import se.MPT.Logics.Utils;
+import se.MindFeed.GameObjects.GO;
 
-import java.awt.Font;
+public class JAVA_GAME extends BasicGame {
 
-
-public class JAVA_GAME extends BasicGame{
-	
-	
-	
 	Font font;
 	Font font2;
 	TrueTypeFont trueTypeFont;
 	TrueTypeFont trueTypeFontSmall;
 
-	
-	
-	
-	
 	public static int CANVAS_HEIGHT = 800;
 	public static int CANVAS_WIDTH = 1100;
-	
+
 	public JAVA_GAME(String title) {
 		super(title);
 		// TODO Auto-generated constructor stub
 	}
-
 
 	public static final float GRAVITY = 0.01f;
 	public static String gameName = "rockSlider";
 
 	public static ArrayList<GO> gameObjects = null;
 
-	private Shape circ = null;
 	private Cube cube = null;
 	private UI ui = null;
 	private Side[] perm = null;
@@ -53,6 +48,7 @@ public class JAVA_GAME extends BasicGame{
 	private ArrayList<Move> latest = null;
 
 	private String godsAlgorithm = "[Solved]";
+
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
 		gameObjects = new ArrayList<>();
@@ -60,13 +56,16 @@ public class JAVA_GAME extends BasicGame{
 		gameObjects.add(cube);
 		ui = new UI();
 		perm = Generator.solvedSide();
-		font = new Font("Verdana", Font.BOLD, 24);
+		// font = new Font("Verdana", Font.BOLD, 24);
+		font = new Font("monospaced", Font.BOLD, 24);
 		trueTypeFont = new TrueTypeFont(font, true);
-		font2 = new Font("Verdana", Font.ITALIC, 23);
+		// font2 = new Font("Verdana", Font.ITALIC, 23);
+		font2 = new Font("monospaced", Font.ITALIC, 24);
 		trueTypeFontSmall = new TrueTypeFont(font2, true);
 		latest = new ArrayList<>();
 		answere = new Move[0];
 	}
+
 	public static void main(String[] s) throws SlickException {
 		AppGameContainer appGameContainer = new AppGameContainer(new JAVA_GAME(gameName));
 		int maxFPS = 60;
@@ -79,111 +78,105 @@ public class JAVA_GAME extends BasicGame{
 
 	@Override
 	public void render(GameContainer arg0, Graphics arg1) throws SlickException {
-//		for(GO go : gameObjects) {
-//			go.render(arg1);
-//		}
+		// for(GO go : gameObjects) {
+		// go.render(arg1);
+		// }
 		cube.render(arg1);
-		trueTypeFontSmall.drawString(CANVAS_WIDTH/2, 0, "Keys 1-9 correspond to the following moves:");
-		trueTypeFont.drawString(CANVAS_WIDTH/2, 30, "F   F2   F'   R   R2   R'   U   U2   U'");
-		trueTypeFontSmall.drawString(CANVAS_WIDTH/2, 60, "Undo: [<]");
-		trueTypeFontSmall.drawString(CANVAS_WIDTH/1.5F, 60, "Solve: [>]");
-//		trueTypeFont.drawString(CANVAS_WIDTH/2, 30, "1    2    3   4    5    6   7    8    9");
-		
-		
-		trueTypeFontSmall.drawString(CANVAS_WIDTH/2, CANVAS_HEIGHT/2, godsAlgorithm, Color.pink);
-	}	
+		trueTypeFontSmall.drawString(CANVAS_WIDTH / 2, 0, "Keys 1-9 correspond to the following moves:");
+		trueTypeFont.drawString(CANVAS_WIDTH / 2, 30, "F   F2   F'   R   R2   R'   U   U2   U'");
+		trueTypeFontSmall.drawString(CANVAS_WIDTH / 2, 60, "Undo: [<]");
+		trueTypeFontSmall.drawString(CANVAS_WIDTH / 1.5F, 60, "Solve: [>]");
+		// trueTypeFont.drawString(CANVAS_WIDTH/2, 30, "1 2 3 4 5 6 7 8 9");
 
-	
+		trueTypeFontSmall.drawString(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2, godsAlgorithm, Color.pink);
+	}
+
 	@Override
-	public void update(GameContainer arg0, int arg1) throws SlickException{
-		
-		
+	public void update(GameContainer arg0, int arg1) throws SlickException {
+
 		Input input = arg0.getInput();
-		if(input.isKeyPressed(input.KEY_1)) {
+		if (input.isKeyPressed(Input.KEY_1)) {
 			Move m = Move.F;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
 			updatePermutation();
 
-		} else if ( input.isKeyPressed(input.KEY_2) ) {
+		} else if (input.isKeyPressed(Input.KEY_2)) {
 			Move m = Move.F2;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
 			updatePermutation();
 
-		} else if ( input.isKeyPressed(input.KEY_3) ) {
+		} else if (input.isKeyPressed(Input.KEY_3)) {
 			Move m = Move.FP;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
 			updatePermutation();
 
-		} else if ( input.isKeyPressed(input.KEY_4) ) {
+		} else if (input.isKeyPressed(Input.KEY_4)) {
 			Move m = Move.R;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
 			updatePermutation();
 
-		} else if ( input.isKeyPressed(input.KEY_5) ) {
+		} else if (input.isKeyPressed(Input.KEY_5)) {
 			Move m = Move.R2;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
 			updatePermutation();
 
-		} else if ( input.isKeyPressed(input.KEY_6) ) {
+		} else if (input.isKeyPressed(Input.KEY_6)) {
 			Move m = Move.RP;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
 			updatePermutation();
 
-		} else if ( input.isKeyPressed(input.KEY_7) ) {
+		} else if (input.isKeyPressed(Input.KEY_7)) {
 			Move m = Move.U;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
 			updatePermutation();
 
-		} else if ( input.isKeyPressed(input.KEY_8) ) {
+		} else if (input.isKeyPressed(Input.KEY_8)) {
 			Move m = Move.U2;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
 			updatePermutation();
 
-		} else if ( input.isKeyPressed(input.KEY_9) ) {
+		} else if (input.isKeyPressed(Input.KEY_9)) {
 			Move m = Move.UP;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
 			updatePermutation();
-		}
-		else if ( input.isKeyPressed(input.KEY_LEFT) && !latest.isEmpty()) {
-			perm = PermGenerator.generate(perm, Utils.reversedMove(latest.get(latest.size()-1)));
-			latest.remove(latest.size()-1);
+		} else if (input.isKeyPressed(Input.KEY_LEFT) && !latest.isEmpty()) {
+			perm = PermGenerator.generate(perm, Utils.reversedMove(latest.get(latest.size() - 1)));
+			latest.remove(latest.size() - 1);
 			updatePermutation();
-		} else if ( input.isKeyPressed(input.KEY_RIGHT) && answere.length > 0) {
+		} else if (input.isKeyPressed(Input.KEY_RIGHT) && answere.length > 0) {
 			Move m = answere[0];
 			latest.add(m);
-			
+
 			perm = PermGenerator.generate(perm, m);
 			updatePermutation();
-		} 
+		}
 
-//		for(GO go : gameObjects) {
-//			go.update(arg0);
-//		}
-		
-		
-		
-		
+		// for(GO go : gameObjects) {
+		// go.update(arg0);
+		// }
+
 	}
+
 	private void updatePermutation() {
 		cube.setPermutations(perm);
 		try {
 			answere = ui.algorithmProcess(perm);
-			
-			godsAlgorithm = answere.length > 0 ? Arrays.toString(answere) : "[Solved]";
+
+			godsAlgorithm = answere.length > 0 ? Utils.moveToString(answere) : "[Solved]";
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		System.out.println(answere);
-//		ui = new UI();
+		// System.out.println(answere);
+		// ui = new UI();
 	}
 }
