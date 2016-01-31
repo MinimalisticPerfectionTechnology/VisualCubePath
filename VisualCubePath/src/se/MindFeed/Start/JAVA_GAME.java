@@ -100,65 +100,102 @@ public class JAVA_GAME extends BasicGame {
 			Move m = Move.F;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			updatePermutation();
+			if (!godsAlgorithm.isEmpty()) {
+				if (m == godsAlgorithm.get(0)) {
+					updatePermutation(true);
+				}
+			}
+			updatePermutation(false);
 
 		} else if (input.isKeyPressed(Input.KEY_2)) {
 			Move m = Move.F2;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			updatePermutation();
-
+			if (!godsAlgorithm.isEmpty()) {
+				if (m == godsAlgorithm.get(0)) {
+					updatePermutation(true);
+				}
+			}
+			updatePermutation(false);
 		} else if (input.isKeyPressed(Input.KEY_3)) {
 			Move m = Move.FP;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			updatePermutation();
-
+			if (!godsAlgorithm.isEmpty()) {
+				if (m == godsAlgorithm.get(0)) {
+					updatePermutation(true);
+				}
+			}
+			updatePermutation(false);
 		} else if (input.isKeyPressed(Input.KEY_4)) {
 			Move m = Move.R;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			updatePermutation();
-
+			if (!godsAlgorithm.isEmpty()) {
+				if (m == godsAlgorithm.get(0)) {
+					updatePermutation(true);
+				}
+			}
+			updatePermutation(false);
 		} else if (input.isKeyPressed(Input.KEY_5)) {
 			Move m = Move.R2;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			updatePermutation();
-
+			if (!godsAlgorithm.isEmpty()) {
+				if (m == godsAlgorithm.get(0)) {
+					updatePermutation(true);
+				}
+			}
+			updatePermutation(false);
 		} else if (input.isKeyPressed(Input.KEY_6)) {
 			Move m = Move.RP;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			updatePermutation();
-
+			if (!godsAlgorithm.isEmpty()) {
+				if (m == godsAlgorithm.get(0)) {
+					updatePermutation(true);
+				}
+			}
+			updatePermutation(false);
 		} else if (input.isKeyPressed(Input.KEY_7)) {
 			Move m = Move.U;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			updatePermutation();
-
+			if (!godsAlgorithm.isEmpty()) {
+				if (m == godsAlgorithm.get(0)) {
+					updatePermutation(true);
+				}
+			}
+			updatePermutation(false);
 		} else if (input.isKeyPressed(Input.KEY_8)) {
 			Move m = Move.U2;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			updatePermutation();
-
+			if (!godsAlgorithm.isEmpty()) {
+				if (m == godsAlgorithm.get(0)) {
+					updatePermutation(true);
+				}
+			}
+			updatePermutation(false);
 		} else if (input.isKeyPressed(Input.KEY_9)) {
 			Move m = Move.UP;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			updatePermutation();
+			if (!godsAlgorithm.isEmpty()) {
+				if (m == godsAlgorithm.get(0)) {
+					updatePermutation(true);
+				}
+			}
+			updatePermutation(false);
 		} else if (input.isKeyPressed(Input.KEY_LEFT) && !latest.isEmpty()) {
 			perm = PermGenerator.generate(perm, Utils.reversedMove(latest.get(latest.size() - 1)));
 			latest.remove(latest.size() - 1);
-			updatePermutation();
+			updatePermutation(false);
 		} else if (input.isKeyPressed(Input.KEY_RIGHT) && !godsAlgorithm.isEmpty()) {
 			Move m = godsAlgorithm.get(0);
 			latest.add(m);
-
 			perm = PermGenerator.generate(perm, m);
-			updatePermutation();
+			updatePermutation(true);
 		}
 
 		// for(GO go : gameObjects) {
@@ -167,13 +204,18 @@ public class JAVA_GAME extends BasicGame {
 
 	}
 
-	private void updatePermutation() {
+	private void updatePermutation(boolean rightMove) {
 		cube.setPermutations(perm);
 		try {
-			Move[] moves = new Move[0];
-			moves = ui.algorithmProcess(perm);
-			godsAlgorithm = new ArrayList<Move>(Arrays.asList(moves));
-			godsAlgorithmString = godsAlgorithm.isEmpty() ? "[Solved]" : Utils.moveToString(moves);
+			if (rightMove) {
+				godsAlgorithm.remove(0);
+				godsAlgorithmString = godsAlgorithm.isEmpty() ? "[Solved]" : Utils.moveToString(godsAlgorithm.toArray(new Move[godsAlgorithm.size()]));
+			} else {
+				Move[] moves = new Move[0];
+				moves = ui.algorithmProcess(perm);
+				godsAlgorithm = new ArrayList<Move>(Arrays.asList(moves));
+				godsAlgorithmString = godsAlgorithm.isEmpty() ? "[Solved]" : Utils.moveToString(moves);
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
