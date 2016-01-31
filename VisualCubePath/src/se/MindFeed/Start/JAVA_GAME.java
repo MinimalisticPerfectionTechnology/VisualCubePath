@@ -2,6 +2,7 @@ package se.MindFeed.Start;
 
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -44,10 +45,10 @@ public class JAVA_GAME extends BasicGame {
 	private Cube cube = null;
 	private UI ui = null;
 	private PieceColor[] perm = null;
-	private Move[] answer = null;
-	private ArrayList<Move> latest = null;
+	private ArrayList<Move> godsAlgorithm;
+	private ArrayList<Move> latest;
 
-	private String godsAlgorithm = "[Solved]";
+	private String godsAlgorithmString = "[Solved]";
 
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
@@ -62,8 +63,8 @@ public class JAVA_GAME extends BasicGame {
 		// font2 = new Font("Verdana", Font.ITALIC, 23);
 		font2 = new Font("monospaced", Font.ITALIC, 24);
 		trueTypeFontSmall = new TrueTypeFont(font2, true);
+		godsAlgorithm = new ArrayList<Move>();
 		latest = new ArrayList<>();
-		answer = new Move[0];
 	}
 
 	public static void main(String[] s) throws SlickException {
@@ -88,7 +89,7 @@ public class JAVA_GAME extends BasicGame {
 		trueTypeFontSmall.drawString(CANVAS_WIDTH / 1.5F, 60, "Solve: [>]");
 		// trueTypeFont.drawString(CANVAS_WIDTH/2, 30, "1 2 3 4 5 6 7 8 9");
 
-		trueTypeFontSmall.drawString(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2, godsAlgorithm, Color.pink);
+		trueTypeFontSmall.drawString(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2, godsAlgorithmString, Color.pink);
 	}
 
 	@Override
@@ -152,8 +153,8 @@ public class JAVA_GAME extends BasicGame {
 			perm = PermGenerator.generate(perm, Utils.reversedMove(latest.get(latest.size() - 1)));
 			latest.remove(latest.size() - 1);
 			updatePermutation();
-		} else if (input.isKeyPressed(Input.KEY_RIGHT) && answer.length > 0) {
-			Move m = answer[0];
+		} else if (input.isKeyPressed(Input.KEY_RIGHT) && !godsAlgorithm.isEmpty()) {
+			Move m = godsAlgorithm.get(0);
 			latest.add(m);
 
 			perm = PermGenerator.generate(perm, m);
@@ -169,14 +170,15 @@ public class JAVA_GAME extends BasicGame {
 	private void updatePermutation() {
 		cube.setPermutations(perm);
 		try {
-			answer = ui.algorithmProcess(perm);
-
-			godsAlgorithm = answer.length > 0 ? Utils.moveToString(answer) : "[Solved]";
+			Move[] moves = new Move[0];
+			moves = ui.algorithmProcess(perm);
+			godsAlgorithm = new ArrayList<Move>(Arrays.asList(moves));
+			godsAlgorithmString = godsAlgorithm.isEmpty() ? "[Solved]" : Utils.moveToString(moves);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// System.out.println(answere);
+		// System.out.println(answer);
 		// ui = new UI();
 	}
 }
