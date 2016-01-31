@@ -127,9 +127,9 @@ public class Utils {
 		return null;
 	}
 
-	public static String moveToString(Move[] answere) {
+	public static String moveToString(Move[] answer) {
 		String moveString = "";
-		for (Move move : answere) {
+		for (Move move : answer) {
 			switch (move) {
 			case F:
 				if (!moveString.isEmpty()) {

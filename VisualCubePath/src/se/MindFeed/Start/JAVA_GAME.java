@@ -44,7 +44,7 @@ public class JAVA_GAME extends BasicGame {
 	private Cube cube = null;
 	private UI ui = null;
 	private PieceColor[] perm = null;
-	private Move[] answere = null;
+	private Move[] answer = null;
 	private ArrayList<Move> latest = null;
 
 	private String godsAlgorithm = "[Solved]";
@@ -63,7 +63,7 @@ public class JAVA_GAME extends BasicGame {
 		font2 = new Font("monospaced", Font.ITALIC, 24);
 		trueTypeFontSmall = new TrueTypeFont(font2, true);
 		latest = new ArrayList<>();
-		answere = new Move[0];
+		answer = new Move[0];
 	}
 
 	public static void main(String[] s) throws SlickException {
@@ -152,8 +152,8 @@ public class JAVA_GAME extends BasicGame {
 			perm = PermGenerator.generate(perm, Utils.reversedMove(latest.get(latest.size() - 1)));
 			latest.remove(latest.size() - 1);
 			updatePermutation();
-		} else if (input.isKeyPressed(Input.KEY_RIGHT) && answere.length > 0) {
-			Move m = answere[0];
+		} else if (input.isKeyPressed(Input.KEY_RIGHT) && answer.length > 0) {
+			Move m = answer[0];
 			latest.add(m);
 
 			perm = PermGenerator.generate(perm, m);
@@ -169,9 +169,9 @@ public class JAVA_GAME extends BasicGame {
 	private void updatePermutation() {
 		cube.setPermutations(perm);
 		try {
-			answere = ui.algorithmProcess(perm);
+			answer = ui.algorithmProcess(perm);
 
-			godsAlgorithm = answere.length > 0 ? Utils.moveToString(answere) : "[Solved]";
+			godsAlgorithm = answer.length > 0 ? Utils.moveToString(answer) : "[Solved]";
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

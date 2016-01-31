@@ -13,10 +13,10 @@ public class MoveProcessor {
 	private Set<Permutation> set2;
 	private Permutation result = null;
 	private Permutation result2 = null;
-	private Move[] answere = null;
+	private Move[] answer = null;
 
 	public MoveProcessor(PieceColor[] startPerrm, boolean shuffledProcessor) {
-		answere = new Move[0];
+		answer = new Move[0];
 		this.set1 = new HashSet<Permutation>();
 		this.set2 = new HashSet<Permutation>();
 		Permutation p = new Permutation(startPerrm, new Move[0]);
@@ -28,7 +28,7 @@ public class MoveProcessor {
 		if (!p.equals(p2)) {
 			runAlgorithm();
 		} else {
-			// ui.setFinalAnswere("[Solved]");
+			// ui.setFinalAnswer("[Solved]");
 		}
 	}
 
@@ -54,7 +54,7 @@ public class MoveProcessor {
 							break;
 						}
 					}
-					answere = generateAnswere();
+					answer = generateAnswer();
 					return;
 				} else if (set1.add(p2)) {
 					newList.add(p2);
@@ -85,7 +85,7 @@ public class MoveProcessor {
 							break;
 						}
 					}
-					answere = generateAnswere();
+					answer = generateAnswer();
 					return;
 				} else if (set2.add(p2)) {
 					newList.add(p2);
@@ -96,12 +96,12 @@ public class MoveProcessor {
 		runAlgorithm();
 	}
 
-	private Move[] generateAnswere() {
+	private Move[] generateAnswer() {
 		Move[] both = Stream.concat(Arrays.stream(result.getMoves()), Arrays.stream(Utils.reverseMoves(result2.getMoves()))).toArray(Move[]::new);
 		return both;
 	}
 
-	public Move[] getAnswere() {
-		return answere;
+	public Move[] getAnswer() {
+		return answer;
 	}
 }
