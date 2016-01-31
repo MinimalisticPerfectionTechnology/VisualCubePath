@@ -1,53 +1,51 @@
 package se.MPT.Logics;
 
-
-
 public class PermGenerator {
-	public static Side[] generate(Side[] permutation, Move move) {
-//		Side[] p = new Side[permutation.length];
-//		System.arraycopy(permutation, 0, p, 0, permutation.length);
-		switch(move) {
+	public static PieceColor[] generate(PieceColor[] permutation, Move move) {
+		// PieceColor[] p = new PieceColor[permutation.length];
+		// System.arraycopy(permutation, 0, p, 0, permutation.length);
+		switch (move) {
 		case R:
 
 			return PermGenerator.r(permutation);
-//			break;
+		// break;
 
 		case R2:
 
 			return PermGenerator.r2(permutation);
-//			break;
+		// break;
 
 		case RP:
 			return PermGenerator.rI(permutation);
-//			break;
+		// break;
 
 		case U:
 			return PermGenerator.u(permutation);
-//			break;
+		// break;
 
 		case U2:
 			return PermGenerator.u2(permutation);
-//			break;
+		// break;
 		case UP:
 			return PermGenerator.uI(permutation);
-//			break;
+		// break;
 		case F:
 			return PermGenerator.f(permutation);
 
-//			break;
+		// break;
 		case F2:
 			return PermGenerator.f2(permutation);
-//			break;
+		// break;
 		case FP:
 			return PermGenerator.fI(permutation);
-//			break;
+		// break;
 
 		}
 		return permutation;
 	}
-	
-	public static Side[] r(Side[] permutation) {
-		Side[] p = new Side[permutation.length];
+
+	public static PieceColor[] r(PieceColor[] permutation) {
+		PieceColor[] p = new PieceColor[permutation.length];
 		System.arraycopy(permutation, 0, p, 0, permutation.length);
 
 		p[1] = permutation[8];
@@ -66,8 +64,8 @@ public class PermGenerator {
 		return p;
 	}
 
-	public static Side[] r2(Side[] permutation) {
-		Side[] p = new Side[permutation.length];
+	public static PieceColor[] r2(PieceColor[] permutation) {
+		PieceColor[] p = new PieceColor[permutation.length];
 		System.arraycopy(permutation, 0, p, 0, permutation.length);
 
 		p[1] = permutation[16];
@@ -86,8 +84,8 @@ public class PermGenerator {
 		return p;
 	}
 
-	public static Side[] rI(Side[] permutation) {
-		Side[] p = new Side[permutation.length];
+	public static PieceColor[] rI(PieceColor[] permutation) {
+		PieceColor[] p = new PieceColor[permutation.length];
 		System.arraycopy(permutation, 0, p, 0, permutation.length);
 
 		p[1] = permutation[18];
@@ -106,8 +104,8 @@ public class PermGenerator {
 		return p;
 	}
 
-	public static Side[] u(Side[] permutation) {
-		Side[] p = new Side[permutation.length];
+	public static PieceColor[] u(PieceColor[] permutation) {
+		PieceColor[] p = new PieceColor[permutation.length];
 		System.arraycopy(permutation, 0, p, 0, permutation.length);
 
 		p[0] = permutation[2];
@@ -126,8 +124,8 @@ public class PermGenerator {
 		return p;
 	}
 
-	public static Side[] u2(Side[] permutation) {
-		Side[] p = new Side[permutation.length];
+	public static PieceColor[] u2(PieceColor[] permutation) {
+		PieceColor[] p = new PieceColor[permutation.length];
 		System.arraycopy(permutation, 0, p, 0, permutation.length);
 
 		p[0] = permutation[3];
@@ -146,8 +144,8 @@ public class PermGenerator {
 		return p;
 	}
 
-	public static Side[] uI(Side[] permutation) {
-		Side[] permutationAfterTurn = new Side[permutation.length];
+	public static PieceColor[] uI(PieceColor[] permutation) {
+		PieceColor[] permutationAfterTurn = new PieceColor[permutation.length];
 		System.arraycopy(permutation, 0, permutationAfterTurn, 0, permutation.length);
 
 		permutationAfterTurn[0] = permutation[1];
@@ -166,8 +164,8 @@ public class PermGenerator {
 		return permutationAfterTurn;
 	}
 
-	public static Side[] f(Side[] permutation) {
-		Side[] p = new Side[permutation.length];
+	public static PieceColor[] f(PieceColor[] permutation) {
+		PieceColor[] p = new PieceColor[permutation.length];
 		System.arraycopy(permutation, 0, p, 0, permutation.length);
 
 		p[2] = permutation[6];
@@ -186,8 +184,8 @@ public class PermGenerator {
 		return p;
 	}
 
-	public static Side[] f2(Side[] permutation) {
-		Side[] p = new Side[permutation.length];
+	public static PieceColor[] f2(PieceColor[] permutation) {
+		PieceColor[] p = new PieceColor[permutation.length];
 		System.arraycopy(permutation, 0, p, 0, permutation.length);
 
 		p[2] = permutation[16];
@@ -206,8 +204,8 @@ public class PermGenerator {
 		return p;
 	}
 
-	public static Side[] fI(Side[] permutation) {
-		Side[] p = new Side[permutation.length];
+	public static PieceColor[] fI(PieceColor[] permutation) {
+		PieceColor[] p = new PieceColor[permutation.length];
 		System.arraycopy(permutation, 0, p, 0, permutation.length);
 
 		p[2] = permutation[11];

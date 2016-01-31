@@ -1,80 +1,80 @@
 package se.MPT.Logics;
 
 public class Utils {
-	public static Side[] convertToInt(String inPerm) {
-		Side[] outPerm = new Side[21];
+	public static PieceColor[] convertToInt(String inPerm) {
+		PieceColor[] outPerm = new PieceColor[21];
 		for (int i = 0; i < 21; i++) {
 			switch (inPerm.charAt(i)) {
 			case 'W':
-				outPerm[i] = Side.WHITE;
+				outPerm[i] = PieceColor.WHITE;
 				break;
 
 			case 'w':
-				outPerm[i] = Side.WHITE;
+				outPerm[i] = PieceColor.WHITE;
 				break;
 
 			case 'O':
-				outPerm[i] = Side.ORANGE;
+				outPerm[i] = PieceColor.ORANGE;
 				break;
 
 			case 'o':
-				outPerm[i] = Side.ORANGE;
+				outPerm[i] = PieceColor.ORANGE;
 				break;
 
 			case 'G':
-				outPerm[i] = Side.GREEN;
+				outPerm[i] = PieceColor.GREEN;
 				break;
 
 			case 'g':
-				outPerm[i] = Side.GREEN;
+				outPerm[i] = PieceColor.GREEN;
 				break;
 
 			case 'R':
-				outPerm[i] = Side.RED;
+				outPerm[i] = PieceColor.RED;
 				break;
 
 			case 'r':
-				outPerm[i] = Side.RED;
+				outPerm[i] = PieceColor.RED;
 				break;
 
 			case 'Y':
-				outPerm[i] = Side.YELLOW;
+				outPerm[i] = PieceColor.YELLOW;
 				break;
 
 			case 'y':
-				outPerm[i] = Side.YELLOW;
+				outPerm[i] = PieceColor.YELLOW;
 				break;
 
 			case 'B':
-				outPerm[i] = Side.BLUE;
+				outPerm[i] = PieceColor.BLUE;
 				break;
 
 			case 'b':
-				outPerm[i] = Side.BLUE;
+				outPerm[i] = PieceColor.BLUE;
 				break;
 
 			case '0':
-				outPerm[i] = Side.WHITE;
+				outPerm[i] = PieceColor.WHITE;
 				break;
 
 			case '1':
-				outPerm[i] = Side.ORANGE;
+				outPerm[i] = PieceColor.ORANGE;
 				break;
 
 			case '2':
-				outPerm[i] = Side.GREEN;
+				outPerm[i] = PieceColor.GREEN;
 				break;
 
 			case '3':
-				outPerm[i] = Side.RED;
+				outPerm[i] = PieceColor.RED;
 				break;
 
 			case '4':
-				outPerm[i] = Side.YELLOW;
+				outPerm[i] = PieceColor.YELLOW;
 				break;
 
 			case '5':
-				outPerm[i] = Side.BLUE;
+				outPerm[i] = PieceColor.BLUE;
 				break;
 			default:
 				break;

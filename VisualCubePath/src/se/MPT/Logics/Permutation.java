@@ -5,12 +5,12 @@ import java.util.Arrays;
 
 public class Permutation {
 	
-	Side[] side;
+	PieceColor[] pieceColor;
 	Move[] moves;
 
 
-	public Permutation(Side[] side, Move[] moves) {
-		this.side = side;
+	public Permutation(PieceColor[] pieceColor, Move[] moves) {
+		this.pieceColor = pieceColor;
 		this.moves = moves;
 	}
 	
@@ -23,13 +23,13 @@ public class Permutation {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + Arrays.hashCode(side);
+		result = prime * result + Arrays.hashCode(pieceColor);
 		return result;
 	}
 
 
-	public Side[] getSide() {
-		return side;
+	public PieceColor[] getPieceColor() {
+		return pieceColor;
 	}
 
 
@@ -42,7 +42,7 @@ public class Permutation {
 		if (getClass() != obj.getClass())
 			return false;
 		Permutation other = (Permutation) obj;
-		if (!Arrays.equals(side, other.side))
+		if (!Arrays.equals(pieceColor, other.pieceColor))
 			return false;
 		return true;
 	}

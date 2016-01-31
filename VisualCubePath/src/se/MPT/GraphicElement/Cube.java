@@ -10,7 +10,7 @@ import org.newdawn.slick.geom.Shape;
 
 import se.MPT.Logics.Generator;
 import se.MPT.Logics.Permutation;
-import se.MPT.Logics.Side;
+import se.MPT.Logics.PieceColor;
 import se.MindFeed.GameObjects.GO;
 import se.MindFeed.Start.JAVA_GAME;
 
@@ -48,7 +48,7 @@ public class Cube extends GO {
 		colors = new Color[LIMIT];
 
 		posisionsOfFaces = new float[LIMIT * 2]; // times two since it's both x and y.
-		setPermutations(permuation.getSide());
+		setPermutations(permuation.getPieceColor());
 		this.width = width;
 		this.height = height;
 
@@ -192,22 +192,22 @@ public class Cube extends GO {
 
 	}
 
-	public void setPermutations(Side[] p) {
+	public void setPermutations(PieceColor[] p) {
 		int i = 0;
 
-		Side[] newSides = new Side[p.length + 3];
+		PieceColor[] newPieceColors = new PieceColor[p.length + 3];
 		// 6, 18, 20
 		int k = 0;
 		for (int j = 0; j < p.length; j++) {
 			if (j == 6 || j == 18 || j == 20) {
 				k++;
 			}
-			newSides[j + k] = p[j];
+			newPieceColors[j + k] = p[j];
 		}
-		newSides[6] = Side.ORANGE;
-		newSides[19] = Side.YELLOW;
-		newSides[22] = Side.BLUE;
-		for (Side s : newSides) {
+		newPieceColors[6] = PieceColor.ORANGE;
+		newPieceColors[19] = PieceColor.YELLOW;
+		newPieceColors[22] = PieceColor.BLUE;
+		for (PieceColor s : newPieceColors) {
 			switch (s) {
 			case WHITE:
 				colors[i] = Color.white;

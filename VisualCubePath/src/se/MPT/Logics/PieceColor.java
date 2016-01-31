@@ -1,6 +1,6 @@
 package se.MPT.Logics;
 
 
-public enum Side {
+public enum PieceColor {
 	WHITE, ORANGE, GREEN, RED, YELLOW, BLUE;
 }

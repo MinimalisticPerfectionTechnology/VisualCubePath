@@ -15,12 +15,12 @@ public class MoveProcessor {
 	private Permutation result2 = null;
 	private Move[] answere = null;
 
-	public MoveProcessor(Side[] startPerrm, boolean shuffledProcessor) {
+	public MoveProcessor(PieceColor[] startPerrm, boolean shuffledProcessor) {
 		answere = new Move[0];
 		this.set1 = new HashSet<Permutation>();
 		this.set2 = new HashSet<Permutation>();
 		Permutation p = new Permutation(startPerrm, new Move[0]);
-		Permutation p2 = new Permutation(Generator.solvedSide(), new Move[0]);
+		Permutation p2 = new Permutation(Generator.solvedColors(), new Move[0]);
 		temporaryList2.add(p2);
 		temporaryList.add(p);
 		set1.add(p);
@@ -41,7 +41,7 @@ public class MoveProcessor {
 			for (Move m : Move.values()) {
 				Move[] moves = Arrays.copyOf(p.getMoves(), p.getMoves().length + 1);
 				moves[p.getMoves().length] = m;
-				Permutation p2 = new Permutation(PermGenerator.generate(p.getSide(), m), moves);
+				Permutation p2 = new Permutation(PermGenerator.generate(p.getPieceColor(), m), moves);
 				if (set2.contains(p2)) {
 					result = p2;
 					Iterator<Permutation> i;
@@ -72,7 +72,7 @@ public class MoveProcessor {
 			for (Move m : Move.values()) {
 				Move[] moves = Arrays.copyOf(p.getMoves(), p.getMoves().length + 1);
 				moves[p.getMoves().length] = m;
-				Permutation p2 = new Permutation(PermGenerator.generate(p.getSide(), m), moves);
+				Permutation p2 = new Permutation(PermGenerator.generate(p.getPieceColor(), m), moves);
 				if (set1.contains(p2)) {
 					result2 = p2;
 					Iterator<Permutation> i;

@@ -16,7 +16,7 @@ import se.MPT.GraphicElement.Cube;
 import se.MPT.Logics.Generator;
 import se.MPT.Logics.Move;
 import se.MPT.Logics.PermGenerator;
-import se.MPT.Logics.Side;
+import se.MPT.Logics.PieceColor;
 import se.MPT.Logics.UI;
 import se.MPT.Logics.Utils;
 import se.MindFeed.GameObjects.GO;
@@ -43,7 +43,7 @@ public class JAVA_GAME extends BasicGame {
 
 	private Cube cube = null;
 	private UI ui = null;
-	private Side[] perm = null;
+	private PieceColor[] perm = null;
 	private Move[] answere = null;
 	private ArrayList<Move> latest = null;
 
@@ -55,7 +55,7 @@ public class JAVA_GAME extends BasicGame {
 		cube = new Cube();
 		gameObjects.add(cube);
 		ui = new UI();
-		perm = Generator.solvedSide();
+		perm = Generator.solvedColors();
 		// font = new Font("Verdana", Font.BOLD, 24);
 		font = new Font("monospaced", Font.BOLD, 24);
 		trueTypeFont = new TrueTypeFont(font, true);
