@@ -210,10 +210,12 @@ public class Cube extends GO {
 		for (PieceColor s : newPieceColors) {
 			switch (s) {
 			case WHITE:
-				colors[i] = Color.white;
+				// colors[i] = Color.white;
+				colors[i] = Color.blue;
 				break;
 			case ORANGE:
-				colors[i] = Color.orange;
+				// colors[i] = Color.orange;
+				colors[i] = Color.blue;
 				break;
 			case GREEN:
 				colors[i] = Color.green;
