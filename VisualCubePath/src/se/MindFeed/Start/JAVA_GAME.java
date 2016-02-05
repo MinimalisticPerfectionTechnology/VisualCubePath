@@ -30,7 +30,7 @@ public class JAVA_GAME extends BasicGame {
 	TrueTypeFont trueTypeFontSmall;
 
 	public static int CANVAS_HEIGHT = 800;
-	public static int CANVAS_WIDTH = 1100;
+	public static int CANVAS_WIDTH = 1300;
 
 	public JAVA_GAME(String title) {
 		super(title);
