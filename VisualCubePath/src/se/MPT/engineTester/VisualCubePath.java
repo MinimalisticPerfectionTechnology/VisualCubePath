@@ -1,4 +1,4 @@
-package se.MindFeed.Start;
+package se.MPT.engineTester;
 
 import java.awt.Font;
 import java.util.ArrayList;
@@ -14,15 +14,15 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 
 import se.MPT.GraphicElement.Cube;
+import se.MPT.GraphicElement.GO;
 import se.MPT.Logics.Generator;
 import se.MPT.Logics.Move;
 import se.MPT.Logics.PermGenerator;
 import se.MPT.Logics.PieceColor;
 import se.MPT.Logics.UI;
 import se.MPT.Logics.Utils;
-import se.MindFeed.GameObjects.GO;
 
-public class JAVA_GAME extends BasicGame {
+public class VisualCubePath extends BasicGame {
 
 	Font font;
 	Font font2;
@@ -32,7 +32,7 @@ public class JAVA_GAME extends BasicGame {
 	public static int CANVAS_HEIGHT = 800;
 	public static int CANVAS_WIDTH = 1300;
 
-	public JAVA_GAME(String title) {
+	public VisualCubePath(String title) {
 		super(title);
 		// TODO Auto-generated constructor stub
 	}
@@ -68,7 +68,7 @@ public class JAVA_GAME extends BasicGame {
 	}
 
 	public static void main(String[] s) throws SlickException {
-		AppGameContainer appGameContainer = new AppGameContainer(new JAVA_GAME(gameName));
+		AppGameContainer appGameContainer = new AppGameContainer(new VisualCubePath(gameName));
 		int maxFPS = 60;
 		appGameContainer.setTargetFrameRate(maxFPS);
 		appGameContainer.setDisplayMode(CANVAS_WIDTH, CANVAS_HEIGHT, false);

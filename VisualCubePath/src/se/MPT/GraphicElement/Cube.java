@@ -11,8 +11,7 @@ import org.newdawn.slick.geom.Shape;
 import se.MPT.Logics.Generator;
 import se.MPT.Logics.Permutation;
 import se.MPT.Logics.PieceColor;
-import se.MindFeed.GameObjects.GO;
-import se.MindFeed.Start.JAVA_GAME;
+import se.MPT.engineTester.VisualCubePath;
 
 public class Cube extends GO {
 
@@ -32,7 +31,7 @@ public class Cube extends GO {
 	Color[] colors = null;
 
 	public Cube() {
-		init(2, JAVA_GAME.CANVAS_HEIGHT - JAVA_GAME.CANVAS_HEIGHT / 3, JAVA_GAME.CANVAS_HEIGHT);
+		init(2, VisualCubePath.CANVAS_HEIGHT - VisualCubePath.CANVAS_HEIGHT / 3, VisualCubePath.CANVAS_HEIGHT);
 	}
 
 	private void initPerspectiveArrays() {
