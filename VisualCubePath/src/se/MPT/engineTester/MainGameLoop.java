@@ -1,4 +1,3 @@
-
 package se.MPT.engineTester;
 
 import org.lwjgl.opengl.Display;
@@ -12,7 +11,6 @@ import se.MPT.shaders.StaticShader;
 public class MainGameLoop {
 	public static void main(String[] args) {
 		DisplayManager.createDisplay();
-
 		Loader loader = new Loader();
 		Renderer renderer = new Renderer();
 		StaticShader shader = new StaticShader();
@@ -26,7 +24,7 @@ public class MainGameLoop {
 
 		int[] indices = { 
 				0, 1, 3, 	// Top left triangle
-				3, 1, 2		// Bottom right triangle
+				3, 1, 2 	// Bottom right triangle
 		};
 
 		RawModel model = loader.loadToVAO(vertices, indices);

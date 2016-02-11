@@ -38,7 +38,7 @@ public class VisualCubePath extends BasicGame {
 	}
 
 	public static final float GRAVITY = 0.01f;
-	public static String gameName = "rockSlider";
+	public static String gameName = "Virtual Cube";
 
 	public static ArrayList<GO> gameObjects = null;
 
