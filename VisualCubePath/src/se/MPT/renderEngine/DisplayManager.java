@@ -10,7 +10,7 @@ import org.lwjgl.opengl.PixelFormat;
 public class DisplayManager {
 	private static final int WIDTH = 500;
 	private static final int HEIGHT = 500;
-	private static int FPS = 60;
+	private static final int FPS_CAP = 120;
 
 	public static void createDisplay() {
 		ContextAttribs attribs = new ContextAttribs(3, 2).withForwardCompatible(true).withProfileCore(true);
@@ -20,7 +20,6 @@ public class DisplayManager {
 			Display.create(new PixelFormat(), attribs);
 			Display.setTitle("Virtual Cube");
 		} catch (LWJGLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -28,12 +27,11 @@ public class DisplayManager {
 	}
 
 	public static void updateDisplay() {
-		Display.sync(FPS);
+		Display.sync(FPS_CAP);
 		Display.update();
 	}
 
 	public static void closeDisplay() {
 		Display.destroy();
 	}
-
 }

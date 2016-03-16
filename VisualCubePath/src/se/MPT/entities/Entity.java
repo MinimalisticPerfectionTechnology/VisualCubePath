@@ -20,10 +20,9 @@ public class Entity {
 	}
 
 	public void increasePosition(float dx, float dy, float dz) {
-		this.rotX += dx;
-		this.rotY += dy;
-		this.rotZ += dz;
-		this.scale += scale;
+		this.position.x += dx;
+		this.position.y += dy;
+		this.position.z += dz;
 	}
 
 	public void increaseRotation(float dx, float dy, float dz) {

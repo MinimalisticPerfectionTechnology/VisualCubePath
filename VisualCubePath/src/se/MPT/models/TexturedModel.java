@@ -1,15 +1,14 @@
 package se.MPT.models;
 
-import se.MPT.renderEngine.RawModel;
 import se.MPT.textures.ModelTexture;
 
 public class TexturedModel {
 	private RawModel rawModel;
-	private ModelTexture modelTexture;
+	private ModelTexture texture;
 
-	public TexturedModel(RawModel rawModel, ModelTexture modelTexture) {
-		this.rawModel = rawModel;
-		this.modelTexture = modelTexture;
+	public TexturedModel(RawModel model, ModelTexture texture) {
+		this.rawModel = model;
+		this.texture = texture;
 	}
 
 	public RawModel getRawModel() {
@@ -17,6 +16,6 @@ public class TexturedModel {
 	}
 
 	public ModelTexture getTexture() {
-		return modelTexture;
+		return texture;
 	}
 }
