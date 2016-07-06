@@ -8,9 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
-import se.MPT.Logics.Generator;
-import se.MPT.Logics.Permutation;
-import se.MPT.Logics.PieceColor;
+import se.MPT.Logics.PermGenerator;
 import se.MPT.engineTester.VisualCubePath;
 
 public class Cube extends GO {
@@ -27,7 +25,7 @@ public class Cube extends GO {
 	int LIMIT;
 	int width;
 	int height;
-	Permutation permuation = null;
+	String permuation = "";
 	Color[] colors = null;
 
 	public Cube() {
@@ -35,19 +33,22 @@ public class Cube extends GO {
 	}
 
 	private void initPerspectiveArrays() {
-		PERSPECTIVE_1 = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
-		// PERSPECTIVE_2 = new int[] { 8, 9, 10, 11, 5, 7, 4, 6, 16, 17, 19, 18, 14, 12, 15, 13, 22, 20, 23, 21, 3, 0, 2, 1 };
+		PERSPECTIVE_1 = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+				23 };
+		// PERSPECTIVE_2 = new int[] { 8, 9, 10, 11, 5, 7, 4, 6, 16, 17, 19, 18,
+		// 14, 12, 15, 13, 22, 20, 23, 21, 3, 0, 2, 1 };
 	}
 
 	private void init(int NR_PER_SIDE, int width, int height) {
 		initPerspectiveArrays();
 		LIMIT = NR_PER_SIDE * NR_PER_SIDE * 6;
-		permuation = Generator.solved();
+		permuation = PermGenerator.solved();
 		faces = new ArrayList<>();
 		colors = new Color[LIMIT];
 
-		posisionsOfFaces = new float[LIMIT * 2]; // times two since it's both x and y.
-		setPermutations(permuation.getPieceColor());
+		posisionsOfFaces = new float[LIMIT * 2]; // times two since it's both x
+													// and y.
+		setPermutations(permuation);
 		this.width = width;
 		this.height = height;
 
@@ -71,11 +72,16 @@ public class Cube extends GO {
 
 			// if(i < lenght) {
 			if (i < xPosisions.length) {
-				int relPosX = ((this.width / xPosisions.length) * i); // 6 = number of faces x-wise
+				int relPosX = ((this.width / xPosisions.length) * i); // 6 =
+																		// number
+																		// of
+																		// faces
+																		// x-wise
 				xPosisions[i] = this.x + relPosX;
 			}
 			// }
-			int relPosY = ((this.height / lenght) * i); // 8 = number of faces y-wise.
+			int relPosY = ((this.height / lenght) * i); // 8 = number of faces
+														// y-wise.
 			yPosisions[i] = this.y + relPosY;
 		}
 
@@ -191,39 +197,40 @@ public class Cube extends GO {
 
 	}
 
-	public void setPermutations(PieceColor[] p) {
+	public void setPermutations(String p) {
+		char[] pieces = p.toCharArray();
 		int i = 0;
 
-		PieceColor[] newPieceColors = new PieceColor[p.length + 3];
+		char[] newPieceColors = new char[pieces.length + 3];
 		// 6, 18, 20
 		int k = 0;
-		for (int j = 0; j < p.length; j++) {
+		for (int j = 0; j < pieces.length; j++) {
 			if (j == 6 || j == 18 || j == 20) {
 				k++;
 			}
-			newPieceColors[j + k] = p[j];
+			newPieceColors[j + k] = pieces[j];
 		}
-		newPieceColors[6] = PieceColor.ORANGE;
-		newPieceColors[19] = PieceColor.YELLOW;
-		newPieceColors[22] = PieceColor.BLUE;
-		for (PieceColor s : newPieceColors) {
+		newPieceColors[6] = 'O';
+		newPieceColors[19] = 'Y';
+		newPieceColors[22] = 'B';
+		for (char s : newPieceColors) {
 			switch (s) {
-			case WHITE:
+			case 'W':
 				colors[i] = Color.white;
 				break;
-			case ORANGE:
+			case 'O':
 				colors[i] = Color.orange;
 				break;
-			case GREEN:
+			case 'G':
 				colors[i] = Color.green;
 				break;
-			case RED:
+			case 'R':
 				colors[i] = Color.red;
 				break;
-			case YELLOW:
+			case 'Y':
 				colors[i] = Color.yellow;
 				break;
-			case BLUE:
+			case 'B':
 				colors[i] = Color.blue;
 				break;
 			}

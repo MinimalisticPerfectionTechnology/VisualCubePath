@@ -2,7 +2,6 @@ package se.MPT.engineTester;
 
 import java.awt.Font;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -15,11 +14,10 @@ import org.newdawn.slick.TrueTypeFont;
 
 import se.MPT.GraphicElement.Cube;
 import se.MPT.GraphicElement.GO;
-import se.MPT.Logics.Generator;
+import se.MPT.Logics.Algorithm;
+import se.MPT.Logics.Info;
 import se.MPT.Logics.Move;
 import se.MPT.Logics.PermGenerator;
-import se.MPT.Logics.PieceColor;
-import se.MPT.Logics.UI;
 import se.MPT.Logics.Utils;
 
 public class VisualCubePath extends BasicGame {
@@ -43,20 +41,21 @@ public class VisualCubePath extends BasicGame {
 	public static ArrayList<GO> gameObjects = null;
 
 	private Cube cube = null;
-	private UI ui = null;
-	private PieceColor[] perm = null;
+	private Algorithm ui = null;
+	private String perm;
 	private ArrayList<Move> godsAlgorithm;
 	private ArrayList<Move> latest;
 
 	private String godsAlgorithmString = "[Solved]";
+	private String godsAlgorithmStringClock = "";
 
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
 		gameObjects = new ArrayList<>();
 		cube = new Cube();
 		gameObjects.add(cube);
-		ui = new UI();
-		perm = Generator.solvedColors();
+		ui = new Algorithm();
+		perm = PermGenerator.solved();
 		// font = new Font("Verdana", Font.BOLD, 24);
 		font = new Font("monospaced", Font.BOLD, 24);
 		trueTypeFont = new TrueTypeFont(font, true);
@@ -90,6 +89,8 @@ public class VisualCubePath extends BasicGame {
 		// trueTypeFont.drawString(CANVAS_WIDTH/2, 30, "1 2 3 4 5 6 7 8 9");
 
 		trueTypeFontSmall.drawString(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2, godsAlgorithmString, Color.pink);
+		trueTypeFontSmall.drawString(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 30, "ms: " + godsAlgorithmStringClock,
+				Color.pink);
 	}
 
 	@Override
@@ -198,29 +199,19 @@ public class VisualCubePath extends BasicGame {
 			updatePermutation(true);
 		}
 
-		// for(GO go : gameObjects) {
-		// go.update(arg0);
-		// }
-
 	}
 
 	private void updatePermutation(boolean rightMove) {
 		cube.setPermutations(perm);
-		try {
-			if (rightMove) {
-				godsAlgorithm.remove(0);
-				godsAlgorithmString = godsAlgorithm.isEmpty() ? "[Solved]" : Utils.moveToString(godsAlgorithm.toArray(new Move[godsAlgorithm.size()]));
-			} else {
-				Move[] moves = new Move[0];
-				moves = ui.algorithmProcess(perm);
-				godsAlgorithm = new ArrayList<Move>(Arrays.asList(moves));
-				godsAlgorithmString = godsAlgorithm.isEmpty() ? "[Solved]" : Utils.moveToString(moves);
-			}
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (rightMove) {
+			godsAlgorithm.remove(0);
+			godsAlgorithmString = godsAlgorithm.isEmpty() ? "[Solved]"
+					: Utils.moveToString(godsAlgorithm.toArray(new Move[godsAlgorithm.size()]));
+		} else {
+			Info result = ui.solve(perm);
+			String moves = result.getPath();
+			godsAlgorithmString = moves.equals("") ? "[Solved]" : moves;
+			godsAlgorithmStringClock = result.getClock();
 		}
-		// System.out.println(answer);
-		// ui = new UI();
 	}
 }

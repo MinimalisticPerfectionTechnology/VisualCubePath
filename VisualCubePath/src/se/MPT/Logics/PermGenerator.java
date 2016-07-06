@@ -1,7 +1,7 @@
 package se.MPT.Logics;
 
 public class PermGenerator {
-	public static PieceColor[] generate(PieceColor[] permutation, Move move) {
+	public static String generate(String permutation, Move move) {
 		// PieceColor[] p = new PieceColor[permutation.length];
 		// System.arraycopy(permutation, 0, p, 0, permutation.length);
 		switch (move) {
@@ -44,9 +44,10 @@ public class PermGenerator {
 		return permutation;
 	}
 
-	public static PieceColor[] r(PieceColor[] permutation) {
-		PieceColor[] p = new PieceColor[permutation.length];
-		System.arraycopy(permutation, 0, p, 0, permutation.length);
+	public static String r(String input) {
+		char[] p = input.toCharArray();
+
+		char[] permutation = input.toCharArray();
 
 		p[1] = permutation[8];
 		p[3] = permutation[10];
@@ -61,12 +62,13 @@ public class PermGenerator {
 		p[18] = permutation[1];
 		p[20] = permutation[3];
 
-		return p;
+		return new String(p);
 	}
 
-	public static PieceColor[] r2(PieceColor[] permutation) {
-		PieceColor[] p = new PieceColor[permutation.length];
-		System.arraycopy(permutation, 0, p, 0, permutation.length);
+	public static String r2(String input) {
+		char[] p = input.toCharArray();
+
+		char[] permutation = input.toCharArray();
 
 		p[1] = permutation[16];
 		p[3] = permutation[17];
@@ -81,12 +83,13 @@ public class PermGenerator {
 		p[18] = permutation[8];
 		p[20] = permutation[10];
 
-		return p;
+		return new String(p);
 	}
 
-	public static PieceColor[] rI(PieceColor[] permutation) {
-		PieceColor[] p = new PieceColor[permutation.length];
-		System.arraycopy(permutation, 0, p, 0, permutation.length);
+	public static String rI(String input) {
+		char[] p = input.toCharArray();
+
+		char[] permutation = input.toCharArray();
 
 		p[1] = permutation[18];
 		p[3] = permutation[20];
@@ -101,12 +104,13 @@ public class PermGenerator {
 		p[18] = permutation[16];
 		p[20] = permutation[17];
 
-		return p;
+		return new String(p);
 	}
 
-	public static PieceColor[] u(PieceColor[] permutation) {
-		PieceColor[] p = new PieceColor[permutation.length];
-		System.arraycopy(permutation, 0, p, 0, permutation.length);
+	public static String u(String input) {
+		char[] p = input.toCharArray();
+
+		char[] permutation = input.toCharArray();
 
 		p[0] = permutation[2];
 		p[1] = permutation[0];
@@ -121,12 +125,13 @@ public class PermGenerator {
 		p[20] = permutation[4];
 		p[19] = permutation[5];
 
-		return p;
+		return new String(p);
 	}
 
-	public static PieceColor[] u2(PieceColor[] permutation) {
-		PieceColor[] p = new PieceColor[permutation.length];
-		System.arraycopy(permutation, 0, p, 0, permutation.length);
+	public static String u2(String input) {
+		char[] p = input.toCharArray();
+
+		char[] permutation = input.toCharArray();
 
 		p[0] = permutation[3];
 		p[1] = permutation[2];
@@ -141,32 +146,34 @@ public class PermGenerator {
 		p[20] = permutation[7];
 		p[19] = permutation[8];
 
-		return p;
+		return new String(p);
 	}
 
-	public static PieceColor[] uI(PieceColor[] permutation) {
-		PieceColor[] permutationAfterTurn = new PieceColor[permutation.length];
-		System.arraycopy(permutation, 0, permutationAfterTurn, 0, permutation.length);
+	public static String uI(String input) {
+		char[] p = input.toCharArray();
 
-		permutationAfterTurn[0] = permutation[1];
-		permutationAfterTurn[1] = permutation[3];
-		permutationAfterTurn[2] = permutation[0];
-		permutationAfterTurn[3] = permutation[2];
-		permutationAfterTurn[4] = permutation[20];
-		permutationAfterTurn[5] = permutation[19];
-		permutationAfterTurn[7] = permutation[4];
-		permutationAfterTurn[8] = permutation[5];
-		permutationAfterTurn[11] = permutation[7];
-		permutationAfterTurn[12] = permutation[8];
-		permutationAfterTurn[20] = permutation[11];
-		permutationAfterTurn[19] = permutation[12];
+		char[] permutation = input.toCharArray();
 
-		return permutationAfterTurn;
+		p[0] = permutation[1];
+		p[1] = permutation[3];
+		p[2] = permutation[0];
+		p[3] = permutation[2];
+		p[4] = permutation[20];
+		p[5] = permutation[19];
+		p[7] = permutation[4];
+		p[8] = permutation[5];
+		p[11] = permutation[7];
+		p[12] = permutation[8];
+		p[20] = permutation[11];
+		p[19] = permutation[12];
+
+		return new String(p);
 	}
 
-	public static PieceColor[] f(PieceColor[] permutation) {
-		PieceColor[] p = new PieceColor[permutation.length];
-		System.arraycopy(permutation, 0, p, 0, permutation.length);
+	public static String f(String input) {
+		char[] p = input.toCharArray();
+
+		char[] permutation = input.toCharArray();
 
 		p[2] = permutation[6];
 		p[3] = permutation[5];
@@ -181,12 +188,13 @@ public class PermGenerator {
 		p[15] = permutation[13];
 		p[16] = permutation[11];
 
-		return p;
+		return new String(p);
 	}
 
-	public static PieceColor[] f2(PieceColor[] permutation) {
-		PieceColor[] p = new PieceColor[permutation.length];
-		System.arraycopy(permutation, 0, p, 0, permutation.length);
+	public static String f2(String input) {
+		char[] p = input.toCharArray();
+
+		char[] permutation = input.toCharArray();
 
 		p[2] = permutation[16];
 		p[3] = permutation[15];
@@ -201,12 +209,13 @@ public class PermGenerator {
 		p[15] = permutation[3];
 		p[16] = permutation[2];
 
-		return p;
+		return new String(p);
 	}
 
-	public static PieceColor[] fI(PieceColor[] permutation) {
-		PieceColor[] p = new PieceColor[permutation.length];
-		System.arraycopy(permutation, 0, p, 0, permutation.length);
+	public static String fI(String input) {
+		char[] p = input.toCharArray();
+
+		char[] permutation = input.toCharArray();
 
 		p[2] = permutation[11];
 		p[3] = permutation[13];
@@ -221,6 +230,10 @@ public class PermGenerator {
 		p[15] = permutation[5];
 		p[16] = permutation[6];
 
-		return p;
+		return new String(p);
+	}
+
+	public static String solved() {
+		return "WWWWOOOGGGGRRRRYYYBBB";
 	}
 }
