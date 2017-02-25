@@ -97,123 +97,82 @@ public class VisualCubePath extends BasicGame {
 
 	@Override
 	public void update(GameContainer arg0, int arg1) throws SlickException {
-
 		Input input = arg0.getInput();
 		if (input.isKeyPressed(Input.KEY_1)) {
 			Move m = Move.F;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			if (!result.isSolved()) {
-				if (m == result.getFirst()) {
-					updatePermutation(true);
-				}
-			}
-			updatePermutation(false);
-
+			updatePermutation(m);
 		} else if (input.isKeyPressed(Input.KEY_2)) {
 			Move m = Move.F2;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			if (!result.isSolved()) {
-				if (m == result.getFirst()) {
-					updatePermutation(true);
-				}
-			}
-			updatePermutation(false);
+			updatePermutation(m);
 		} else if (input.isKeyPressed(Input.KEY_3)) {
 			Move m = Move.FP;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			if (!result.isSolved()) {
-				if (m == result.getFirst()) {
-					updatePermutation(true);
-				}
-			}
-			updatePermutation(false);
+			updatePermutation(m);
 		} else if (input.isKeyPressed(Input.KEY_4)) {
 			Move m = Move.R;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			if (!result.isSolved()) {
-				if (m == result.getFirst()) {
-					updatePermutation(true);
-				}
-			}
-			updatePermutation(false);
+			updatePermutation(m);
 		} else if (input.isKeyPressed(Input.KEY_5)) {
 			Move m = Move.R2;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			if (!godsAlgorithm.isEmpty()) {
-				if (m == godsAlgorithm.get(0)) {
-					updatePermutation(true);
-				}
-			}
-			updatePermutation(false);
+			updatePermutation(m);
 		} else if (input.isKeyPressed(Input.KEY_6)) {
 			Move m = Move.RP;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			if (!result.isSolved()) {
-				if (m == result.getFirst()) {
-					updatePermutation(true);
-				}
-			}
-			updatePermutation(false);
+			updatePermutation(m);
 		} else if (input.isKeyPressed(Input.KEY_7)) {
 			Move m = Move.U;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			if (!result.isSolved()) {
-				if (m == result.getFirst()) {
-					updatePermutation(true);
-				}
-			}
-			updatePermutation(false);
+			updatePermutation(m);
 		} else if (input.isKeyPressed(Input.KEY_8)) {
 			Move m = Move.U2;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			if (!result.isSolved()) {
-				if (m == result.getFirst()) {
-					updatePermutation(true);
-				}
-			}
-			updatePermutation(false);
+			updatePermutation(m);
 		} else if (input.isKeyPressed(Input.KEY_9)) {
 			Move m = Move.UP;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			if (!result.isSolved()) {
-				if (m == result.getFirst()) {
-					updatePermutation(true);
-				}
-			}
-			updatePermutation(false);
+			updatePermutation(m);
+
 		} else if (input.isKeyPressed(Input.KEY_LEFT) && !latest.isEmpty()) {
 			perm = PermGenerator.generate(perm, Utils.reversedMove(latest.get(latest.size() - 1)));
 			latest.remove(latest.size() - 1);
-			updatePermutation(false);
+			updatePermutation2();
 		} else if (input.isKeyPressed(Input.KEY_RIGHT) && !result.isSolved()) {
 			Move m = result.getFirst();
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			updatePermutation(false);
+			updatePermutation2();
 		}
-
 	}
 
-	private void updatePermutation(boolean rightMove) {
-		cube.setPermutations(perm);
-		if (rightMove) {
-			// godsAlgorithm.remove(0);
-			godsAlgorithmString = godsAlgorithm.isEmpty() ? SOLVED : result.getPathString();
-			result.prune();
-		} else {
-			result = ui.solve(perm);
-			String moves = result.getPathString();
-			godsAlgorithmString = moves.equals("") ? SOLVED : moves;
-			godsAlgorithmStringClock = result.getClock();
+	private void updatePermutation(Move m) {
+		if (!result.isSolved()) {
+			if (m == result.getFirst()) {
+				updatePermutation2(); // TODO what?? anropas två gånger?
+			}
 		}
+		godsAlgorithmString = godsAlgorithm.isEmpty() ? SOLVED : result.getPathString();
+		result.prune();
+		updatePermutation2();
+	}
+
+	private void updatePermutation2() {
+		cube.setPermutations(perm);
+		result = ui.solve(perm);
+
+		String moves = result.getPathString();
+		godsAlgorithmString = moves.equals("") ? SOLVED : moves;
+		godsAlgorithmStringClock = result.getClock();
 	}
 }
