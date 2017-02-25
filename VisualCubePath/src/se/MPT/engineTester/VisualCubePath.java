@@ -22,6 +22,7 @@ import se.MPT.Logics.Utils;
 
 public class VisualCubePath extends BasicGame {
 
+	private static final String SOLVED = "[Solved]";
 	Font font;
 	Font font2;
 	TrueTypeFont trueTypeFont;
@@ -46,8 +47,9 @@ public class VisualCubePath extends BasicGame {
 	private ArrayList<Move> godsAlgorithm;
 	private ArrayList<Move> latest;
 
-	private String godsAlgorithmString = "[Solved]";
+	private String godsAlgorithmString = SOLVED;
 	private String godsAlgorithmStringClock = "";
+	private Info result;
 
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
@@ -64,6 +66,7 @@ public class VisualCubePath extends BasicGame {
 		trueTypeFontSmall = new TrueTypeFont(font2, true);
 		godsAlgorithm = new ArrayList<Move>();
 		latest = new ArrayList<>();
+		result = new Info();
 	}
 
 	public static void main(String[] s) throws SlickException {
@@ -89,8 +92,7 @@ public class VisualCubePath extends BasicGame {
 		// trueTypeFont.drawString(CANVAS_WIDTH/2, 30, "1 2 3 4 5 6 7 8 9");
 
 		trueTypeFontSmall.drawString(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2, godsAlgorithmString, Color.pink);
-		trueTypeFontSmall.drawString(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 30, "ms: " + godsAlgorithmStringClock,
-				Color.pink);
+		trueTypeFontSmall.drawString(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 30, "ms: " + godsAlgorithmStringClock, Color.pink);
 	}
 
 	@Override
@@ -101,8 +103,8 @@ public class VisualCubePath extends BasicGame {
 			Move m = Move.F;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			if (!godsAlgorithm.isEmpty()) {
-				if (m == godsAlgorithm.get(0)) {
+			if (!result.isSolved()) {
+				if (m == result.getFirst()) {
 					updatePermutation(true);
 				}
 			}
@@ -112,8 +114,8 @@ public class VisualCubePath extends BasicGame {
 			Move m = Move.F2;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			if (!godsAlgorithm.isEmpty()) {
-				if (m == godsAlgorithm.get(0)) {
+			if (!result.isSolved()) {
+				if (m == result.getFirst()) {
 					updatePermutation(true);
 				}
 			}
@@ -122,8 +124,8 @@ public class VisualCubePath extends BasicGame {
 			Move m = Move.FP;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			if (!godsAlgorithm.isEmpty()) {
-				if (m == godsAlgorithm.get(0)) {
+			if (!result.isSolved()) {
+				if (m == result.getFirst()) {
 					updatePermutation(true);
 				}
 			}
@@ -132,8 +134,8 @@ public class VisualCubePath extends BasicGame {
 			Move m = Move.R;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			if (!godsAlgorithm.isEmpty()) {
-				if (m == godsAlgorithm.get(0)) {
+			if (!result.isSolved()) {
+				if (m == result.getFirst()) {
 					updatePermutation(true);
 				}
 			}
@@ -152,8 +154,8 @@ public class VisualCubePath extends BasicGame {
 			Move m = Move.RP;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			if (!godsAlgorithm.isEmpty()) {
-				if (m == godsAlgorithm.get(0)) {
+			if (!result.isSolved()) {
+				if (m == result.getFirst()) {
 					updatePermutation(true);
 				}
 			}
@@ -162,8 +164,8 @@ public class VisualCubePath extends BasicGame {
 			Move m = Move.U;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			if (!godsAlgorithm.isEmpty()) {
-				if (m == godsAlgorithm.get(0)) {
+			if (!result.isSolved()) {
+				if (m == result.getFirst()) {
 					updatePermutation(true);
 				}
 			}
@@ -172,8 +174,8 @@ public class VisualCubePath extends BasicGame {
 			Move m = Move.U2;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			if (!godsAlgorithm.isEmpty()) {
-				if (m == godsAlgorithm.get(0)) {
+			if (!result.isSolved()) {
+				if (m == result.getFirst()) {
 					updatePermutation(true);
 				}
 			}
@@ -182,8 +184,8 @@ public class VisualCubePath extends BasicGame {
 			Move m = Move.UP;
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			if (!godsAlgorithm.isEmpty()) {
-				if (m == godsAlgorithm.get(0)) {
+			if (!result.isSolved()) {
+				if (m == result.getFirst()) {
 					updatePermutation(true);
 				}
 			}
@@ -192,11 +194,11 @@ public class VisualCubePath extends BasicGame {
 			perm = PermGenerator.generate(perm, Utils.reversedMove(latest.get(latest.size() - 1)));
 			latest.remove(latest.size() - 1);
 			updatePermutation(false);
-		} else if (input.isKeyPressed(Input.KEY_RIGHT) && !godsAlgorithm.isEmpty()) {
-			Move m = godsAlgorithm.get(0);
+		} else if (input.isKeyPressed(Input.KEY_RIGHT) && !result.isSolved()) {
+			Move m = result.getFirst();
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			updatePermutation(true);
+			updatePermutation(false);
 		}
 
 	}
@@ -204,13 +206,13 @@ public class VisualCubePath extends BasicGame {
 	private void updatePermutation(boolean rightMove) {
 		cube.setPermutations(perm);
 		if (rightMove) {
-			godsAlgorithm.remove(0);
-			godsAlgorithmString = godsAlgorithm.isEmpty() ? "[Solved]"
-					: Utils.moveToString(godsAlgorithm.toArray(new Move[godsAlgorithm.size()]));
+			// godsAlgorithm.remove(0);
+			godsAlgorithmString = godsAlgorithm.isEmpty() ? SOLVED : result.getPathString();
+			result.prune();
 		} else {
-			Info result = ui.solve(perm);
-			String moves = result.getPath();
-			godsAlgorithmString = moves.equals("") ? "[Solved]" : moves;
+			result = ui.solve(perm);
+			String moves = result.getPathString();
+			godsAlgorithmString = moves.equals("") ? SOLVED : moves;
 			godsAlgorithmStringClock = result.getClock();
 		}
 	}

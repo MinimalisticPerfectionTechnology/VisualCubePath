@@ -27,8 +27,7 @@ public class Algorithm {
 		return solve(peersSolved, peersScrumbled, mapFromScrumbled, mapFromSolved);
 	}
 
-	private Info solve(Map<String, Move[]> peers1, Map<String, Move[]> peers2, Map<String, Move[]> mapOther,
-			Map<String, Move[]> mapOwn) {
+	private Info solve(Map<String, Move[]> peers1, Map<String, Move[]> peers2, Map<String, Move[]> mapOther, Map<String, Move[]> mapOwn) {
 		Map<String, Move[]> newPeers = new HashMap<>();
 		Iterator<Entry<String, Move[]>> it = peers1.entrySet().iterator();
 		while (it.hasNext()) {
@@ -54,8 +53,7 @@ public class Algorithm {
 				movesExtended[currentMoves.length] = move;
 				String newPerm = PermGenerator.generate(currentPerm, move);
 				if (mapOther.containsKey(newPerm)) {
-					return new Info(Arrays.toString(generateAnswer(mapOther.get(newPerm), movesExtended)),
-							Long.toString(System.currentTimeMillis() - startTime));
+					return new Info(generateAnswer(mapOther.get(newPerm), movesExtended), Long.toString(System.currentTimeMillis() - startTime));
 				} else if (!mapOwn.containsKey(newPerm)) {
 					mapOwn.put(newPerm, movesExtended);
 					newPeers.put(newPerm, movesExtended);
@@ -68,11 +66,9 @@ public class Algorithm {
 	private Move[] generateAnswer(Move[] result, Move[] result2) {
 		Move[] both = null;
 		if ((result.length + result2.length) % 2 == 0) {
-			both = Stream.concat(Arrays.stream(result2), Arrays.stream(Utils.reverseMoves(result)))
-					.toArray(Move[]::new);
+			both = Stream.concat(Arrays.stream(result2), Arrays.stream(Utils.reverseMoves(result))).toArray(Move[]::new);
 		} else {
-			both = Stream.concat(Arrays.stream(result), Arrays.stream(Utils.reverseMoves(result2)))
-					.toArray(Move[]::new);
+			both = Stream.concat(Arrays.stream(result), Arrays.stream(Utils.reverseMoves(result2))).toArray(Move[]::new);
 		}
 		return both;
 	}
