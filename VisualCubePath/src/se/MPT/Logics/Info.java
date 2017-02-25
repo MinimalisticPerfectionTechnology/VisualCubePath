@@ -46,10 +46,4 @@ public class Info {
 			godsAlgorithm.remove(0);
 		}
 	}
-
-	@Override
-	public String toString() {
-		return "Info [godsAlgorithm=" + godsAlgorithm + ", clock=" + clock + "]";
-	}
-
 }

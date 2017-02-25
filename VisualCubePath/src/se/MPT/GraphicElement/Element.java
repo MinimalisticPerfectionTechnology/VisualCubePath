@@ -4,7 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Shape;
 
-public abstract class GO {
+public abstract class Element {
 	protected float x;
 	protected float y;
 	protected float dx;

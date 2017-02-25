@@ -13,7 +13,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 
 import se.MPT.GraphicElement.Cube;
-import se.MPT.GraphicElement.GO;
+import se.MPT.GraphicElement.Element;
 import se.MPT.Logics.Algorithm;
 import se.MPT.Logics.Info;
 import se.MPT.Logics.Move;
@@ -33,18 +33,16 @@ public class VisualCubePath extends BasicGame {
 
 	public VisualCubePath(String title) {
 		super(title);
-		// TODO Auto-generated constructor stub
 	}
 
 	public static final float GRAVITY = 0.01f;
-	public static String gameName = "rockSlider";
+	public static String gameName = "2x2x2";
 
-	public static ArrayList<GO> gameObjects = null;
+	public static ArrayList<Element> gameObjects = null;
 
 	private Cube cube = null;
 	private Algorithm ui = null;
 	private String perm;
-	private ArrayList<Move> godsAlgorithm;
 	private ArrayList<Move> latest;
 
 	private String godsAlgorithmString = SOLVED;
@@ -53,6 +51,8 @@ public class VisualCubePath extends BasicGame {
 
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
+		CANVAS_HEIGHT = arg0.getHeight();
+		CANVAS_WIDTH = arg0.getWidth();
 		gameObjects = new ArrayList<>();
 		cube = new Cube();
 		gameObjects.add(cube);
@@ -64,17 +64,16 @@ public class VisualCubePath extends BasicGame {
 		// font2 = new Font("Verdana", Font.ITALIC, 23);
 		font2 = new Font("monospaced", Font.ITALIC, 24);
 		trueTypeFontSmall = new TrueTypeFont(font2, true);
-		godsAlgorithm = new ArrayList<Move>();
 		latest = new ArrayList<>();
 		result = new Info();
-		updatePermutation2();
+
 	}
 
 	public static void main(String[] s) throws SlickException {
 		AppGameContainer appGameContainer = new AppGameContainer(new VisualCubePath(gameName));
 		int maxFPS = 60;
 		appGameContainer.setTargetFrameRate(maxFPS);
-		appGameContainer.setDisplayMode(CANVAS_WIDTH, CANVAS_HEIGHT, false);
+		appGameContainer.setDisplayMode(appGameContainer.getScreenWidth(), appGameContainer.getScreenHeight(), true);
 		appGameContainer.setAlwaysRender(true);
 		appGameContainer.start();
 
@@ -82,15 +81,11 @@ public class VisualCubePath extends BasicGame {
 
 	@Override
 	public void render(GameContainer arg0, Graphics arg1) throws SlickException {
-		// for(GO go : gameObjects) {
-		// go.render(arg1);
-		// }
 		cube.render(arg1);
 		trueTypeFontSmall.drawString(CANVAS_WIDTH / 2, 0, "Keys 1-9 correspond to the following moves:");
 		trueTypeFont.drawString(CANVAS_WIDTH / 2, 30, "F   F2   F'   R   R2   R'   U   U2   U'");
 		trueTypeFontSmall.drawString(CANVAS_WIDTH / 2, 60, "Undo: [<]");
 		trueTypeFontSmall.drawString(CANVAS_WIDTH / 1.5F, 60, "Solve: [>]");
-		// trueTypeFont.drawString(CANVAS_WIDTH/2, 30, "1 2 3 4 5 6 7 8 9");
 
 		trueTypeFontSmall.drawString(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2, godsAlgorithmString, Color.pink);
 		trueTypeFontSmall.drawString(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 30, "ms: " + godsAlgorithmStringClock, Color.pink);
@@ -164,14 +159,14 @@ public class VisualCubePath extends BasicGame {
 	}
 
 	private void updatePermutation(Move m) {
-		boolean isFirstMove = false;
+		boolean isCorrectMove = false;
 		if (!result.isSolved()) {
 			if (m == result.getFirst()) {
-				isFirstMove = true;
+				isCorrectMove = true;
 				makeRightMove();
 			}
 		}
-		if (!isFirstMove) {
+		if (!isCorrectMove) {
 			updatePermutation2();
 		}
 	}

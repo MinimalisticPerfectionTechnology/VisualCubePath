@@ -11,12 +11,11 @@ import org.newdawn.slick.geom.Shape;
 import se.MPT.Logics.PermGenerator;
 import se.MPT.engineTester.VisualCubePath;
 
-public class Cube extends GO {
+public class Cube extends Element {
 
 	ArrayList<Shape> faces = null;
 
 	private int[] PERSPECTIVE_1 = null;
-	// private int[] PERSPECTIVE_2 = null;
 
 	private static int NR_VERT = 8;
 	private static int NR_HORIZ = 6;
@@ -33,10 +32,7 @@ public class Cube extends GO {
 	}
 
 	private void initPerspectiveArrays() {
-		PERSPECTIVE_1 = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-				23 };
-		// PERSPECTIVE_2 = new int[] { 8, 9, 10, 11, 5, 7, 4, 6, 16, 17, 19, 18,
-		// 14, 12, 15, 13, 22, 20, 23, 21, 3, 0, 2, 1 };
+		PERSPECTIVE_1 = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
 	}
 
 	private void init(int NR_PER_SIDE, int width, int height) {
@@ -69,8 +65,6 @@ public class Cube extends GO {
 		float[] yPosisions = new float[NR_VERT];
 		int lenght = yPosisions.length;
 		for (int i = 0; i < lenght; i++) {
-
-			// if(i < lenght) {
 			if (i < xPosisions.length) {
 				int relPosX = ((this.width / xPosisions.length) * i); // 6 =
 																		// number
@@ -187,12 +181,6 @@ public class Cube extends GO {
 				posisionsOfFaces[index + 1] = yPosisions[7];
 				break;
 			}
-
-			// if(i % 2 == 0) {
-			// posisionsOfFaces[i] = xPosisions[i];
-			// } else {
-			// posisionsOfFaces[i] = this.height;
-			// }
 		}
 
 	}
@@ -236,13 +224,11 @@ public class Cube extends GO {
 			}
 			i++;
 		}
-		// resetPosisions();
 	}
 
 	@Override
 	public void update(GameContainer container) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -255,5 +241,4 @@ public class Cube extends GO {
 			i++;
 		}
 	}
-
 }
