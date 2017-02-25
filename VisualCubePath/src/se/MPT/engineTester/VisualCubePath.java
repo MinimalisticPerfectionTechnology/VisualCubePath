@@ -144,6 +144,9 @@ public class VisualCubePath extends BasicGame {
 			perm = PermGenerator.generate(perm, Utils.reversedMove(latest.get(latest.size() - 1)));
 			latest.remove(latest.size() - 1);
 			updatePermutation2();
+			if (latest.isEmpty()) {
+				godsAlgorithmString = SOLVED;
+			}
 		} else if (input.isKeyPressed(Input.KEY_RIGHT) && !result.isSolved()) {
 			Move m = result.getFirst();
 			latest.add(m);
@@ -176,7 +179,7 @@ public class VisualCubePath extends BasicGame {
 		result = ui.solve(perm);
 
 		String moves = result.getPathString();
-		godsAlgorithmString = moves.equals("") ? SOLVED : moves;
+		godsAlgorithmString = result.isSolved() ? SOLVED : moves;
 		godsAlgorithmStringClock = result.getClock();
 	}
 }

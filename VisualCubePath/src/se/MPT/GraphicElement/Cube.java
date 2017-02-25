@@ -207,7 +207,7 @@ public class Cube extends Element {
 				colors[i] = Color.white;
 				break;
 			case 'O':
-				colors[i] = Color.orange;
+				colors[i] = new Color(1.0f, 0.6f, 0.0f);
 				break;
 			case 'G':
 				colors[i] = Color.green;
