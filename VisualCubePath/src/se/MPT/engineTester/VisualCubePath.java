@@ -67,6 +67,7 @@ public class VisualCubePath extends BasicGame {
 		godsAlgorithm = new ArrayList<Move>();
 		latest = new ArrayList<>();
 		result = new Info();
+		updatePermutation2();
 	}
 
 	public static void main(String[] s) throws SlickException {
@@ -152,19 +153,27 @@ public class VisualCubePath extends BasicGame {
 			Move m = result.getFirst();
 			latest.add(m);
 			perm = PermGenerator.generate(perm, m);
-			updatePermutation2();
+			makeRightMove();
 		}
 	}
 
+	private void makeRightMove() {
+		result.prune();
+		godsAlgorithmString = result.isSolved() ? SOLVED : result.getPathString();
+		cube.setPermutations(perm);
+	}
+
 	private void updatePermutation(Move m) {
+		boolean isFirstMove = false;
 		if (!result.isSolved()) {
 			if (m == result.getFirst()) {
-				updatePermutation2(); // TODO what?? anropas två gånger?
+				isFirstMove = true;
+				makeRightMove();
 			}
 		}
-		godsAlgorithmString = godsAlgorithm.isEmpty() ? SOLVED : result.getPathString();
-		result.prune();
-		updatePermutation2();
+		if (!isFirstMove) {
+			updatePermutation2();
+		}
 	}
 
 	private void updatePermutation2() {

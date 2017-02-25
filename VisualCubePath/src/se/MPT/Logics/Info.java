@@ -1,15 +1,13 @@
 package se.MPT.Logics;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Info {
 	private List<Move> godsAlgorithm;
-	private String godsAlgorithmString;
 
 	public String getPathString() {
-		return godsAlgorithmString;
+		return this.godsAlgorithm.toString();
 	}
 
 	public String getClock() {
@@ -22,8 +20,6 @@ public class Info {
 		godsAlgorithm = new ArrayList<>(pathArray.length);
 		append(pathArray);
 		this.clock = clock;
-		this.godsAlgorithmString = Arrays.toString(pathArray);
-		godsAlgorithmString = godsAlgorithm.toString();
 	}
 
 	private void append(Move[] path) {
@@ -35,7 +31,6 @@ public class Info {
 	public Info() {
 		this.godsAlgorithm = new ArrayList<>();
 		this.clock = "";
-		godsAlgorithmString = "";
 	}
 
 	public boolean isSolved() {
@@ -54,7 +49,7 @@ public class Info {
 
 	@Override
 	public String toString() {
-		return "Info [path=" + godsAlgorithm + ", clock=" + clock + "]";
+		return "Info [godsAlgorithm=" + godsAlgorithm + ", clock=" + clock + "]";
 	}
 
 }

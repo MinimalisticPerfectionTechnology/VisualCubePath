@@ -6,40 +6,23 @@ public class PermGenerator {
 		// System.arraycopy(permutation, 0, p, 0, permutation.length);
 		switch (move) {
 		case R:
-
 			return PermGenerator.r(permutation);
-		// break;
-
 		case R2:
-
 			return PermGenerator.r2(permutation);
-		// break;
-
 		case RP:
 			return PermGenerator.rI(permutation);
-		// break;
-
 		case U:
 			return PermGenerator.u(permutation);
-		// break;
-
 		case U2:
 			return PermGenerator.u2(permutation);
-		// break;
 		case UP:
 			return PermGenerator.uI(permutation);
-		// break;
 		case F:
 			return PermGenerator.f(permutation);
-
-		// break;
 		case F2:
 			return PermGenerator.f2(permutation);
-		// break;
 		case FP:
 			return PermGenerator.fI(permutation);
-		// break;
-
 		}
 		return permutation;
 	}
